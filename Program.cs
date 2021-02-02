@@ -9,8 +9,6 @@ namespace ConfigurationsForConsoleApps
 {
     class Program
     {
-        public static IConfigurationRoot configuration;
-
         static void Main(string[] args)
         {
             var serviceCollection = new ServiceCollection();
@@ -25,7 +23,7 @@ namespace ConfigurationsForConsoleApps
         {
             services.AddLogging(c => c.AddConsole());
 
-            configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             services.Configure<ConfigurationContainer>(configuration.Bind);
             services.AddTransient<MailService>();
         }
